@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: flask-demo-test-app
-          image: sreelk589/flask-redis:latest
+          image: sreelk589/flask-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
