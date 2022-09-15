@@ -10,7 +10,17 @@ spec:
       port: 5000
       targetPort: 5000
   type: LoadBalancer
-
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+matadata:
+  name: flask-pv-claim
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
