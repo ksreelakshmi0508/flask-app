@@ -12,10 +12,26 @@ spec:
   type: LoadBalancer
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: flask-pv-storage
+  labels:
+  type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/app"
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 matadata:
   name: flask-pv-claim
 spec:
+  storageClassName: manual
   accessModes: 
     - ReadWriteOnce
   resources:
