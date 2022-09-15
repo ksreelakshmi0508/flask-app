@@ -64,4 +64,4 @@ spec:
             - containerPort: 5000
           volumeMounts:
             - mountPath: "/app"
-              name: flask-demo-test-app
+              name: flask-pv-storage
