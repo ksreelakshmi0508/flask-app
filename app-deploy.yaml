@@ -11,33 +11,6 @@ spec:
       targetPort: 5000
   type: LoadBalancer
 ---
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: flask-pv-storage
-  labels:
-  type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/app"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-matadata:
-  name: flask-pv-claim
-spec:
-  storageClassName: manual
-  accessModes: 
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -53,15 +26,12 @@ spec:
         app: flask-demo-test-app
     spec:
       volumes:
-        - name: flask-pv-storage
-          persistentVolumeClaim:
-            claimName: flask-pv-claim
+        - name: flask-storage
+          emptyDir: {}
       containers:
         - name: flask-demo-test-app
           image: sreelk589/flask-app:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
-          volumeMounts:
-            - mountPath: "/app"
-              name: flask-pv-storage
+         
